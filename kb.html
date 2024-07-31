@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurzbriefe Automation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-section {
+            margin-bottom: 20px;
+        }
+        .form-section label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-section input, .form-section select, .form-section textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        .form-section textarea {
+            height: 100px;
+        }
+        .summary {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kurzbriefe Automation</h1>
+    <form id="kurzbriefeForm">
+        <div class="form-section">
+            <label for="vorname">Vorname</label>
+            <input type="text" id="vorname" name="vorname" required>
+
+            <label for="nachname">Nachname</label>
+            <input type="text" id="nachname" name="nachname" required>
+
+            <label for="geschlecht">Geschlecht</label>
+            <select id="geschlecht" name="geschlecht" required>
+                <option value="männlich">Männlich</option>
+                <option value="weiblich">Weiblich</option>
+                <option value="divers">Divers</option>
+            </select>
+
+            <label for="behandlungsdatum">Seit wann in unserer ambulanten Behandlung?</label>
+            <input type="date" id="behandlungsdatum" name="behandlungsdatum" required>
+        </div>
+
+        <div class="form-section">
+            <h2>Multiaxiale Diagnosen</h2>
+
+            <label for="achse1">Achse I</label>
+            <input type="text" id="achse1" name="achse1" required>
+
+            <label for="achse2">Achse II</label>
+            <input type="text" id="achse2" name="achse2" required>
+
+            <label for="achse3">Achse III</label>
+            <select id="achse3" name="achse3" required>
+                <option value="Durchschnittliches Intelligenz">Durchschnittliches Intelligenz</option>
+                <option value="Untere Durchschnittliche Intelligenz">Untere Durchschnittliche Intelligenz</option>
+                <option value="Über Durchschnittliche Intelligenz">Über Durchschnittliche Intelligenz</option>
+                <option value="Unterdurchdurchschnittlich">Unterdurchdurchschnittlich</option>
+                <option value="Leicht Unterdurchschnittlich">Leicht Unterdurchschnittlich</option>
+                <option value="Weit Unterdurchschnittlich">Weit Unterdurchschnittlich</option>
+                <option value="Überdurchschnittlich">Überdurchschnittlich</option>
+                <option value="Weit Überdurchschnittlich">Weit Überdurchschnittlich</option>
+                <option value="Intelligenzminderung (F70)">Intelligenzminderung (F70)</option>
+                <option value="Mittelgradige Intelligenzminderung (F71)">Mittelgradige Intelligenzminderung (F71)</option>
+                <option value="Schwere Intelligenzminderung (F72)">Schwere Intelligenzminderung (F72)</option>
+                <option value="Schwerste Intelligenzminderung (F73)">Schwerste Intelligenzminderung (F73)</option>
+            </select>
+
+            <label for="achse4">Achse IV</label>
+            <select id="achse4" name="achse4" required>
+                <option value="Keine körperliche Erkrankung">Keine körperliche Erkrankung</option>
+                <option value="Körperliche Erkrankung">Körperliche Erkrankung</option>
+            </select>
+
+            <label for="achse5">Achse V</label>
+            <select id="achse5" name="achse5" required>
+                <option value="0 Keine Probleme">0 Keine Probleme</option>
+                <option value="1 Abnorme intrafamiliäre Beziehungen">1 Abnorme intrafamiliäre Beziehungen</option>
+                <option value="1.0 Mangel an Wärme in der Eltern-Kind-Beziehung (Z62.5)">1.0 Mangel an Wärme in der Eltern-Kind-Beziehung (Z62.5)</option>
+                <option value="1.1 Disharmonie in der Familie zwischen Erwachsenen (Z63.0)">1.1 Disharmonie in der Familie zwischen Erwachsenen (Z63.0)</option>
+                <option value="1.2 Feindliche Ablehnung oder Sündenbockzuweisung gegenüber dem Kind (Z62.3)">1.2 Feindliche Ablehnung oder Sündenbockzuweisung gegenüber dem Kind (Z62.3)</option>
+                <option value="1.3 Körperliche Kindesmisshandlung (Z61.6)">1.3 Körperliche Kindesmisshandlung (Z61.6)</option>
+                <option value="1.4 Sexueller Missbrauch (innerhalb der Familie) (Z61.4)">1.4 Sexueller Missbrauch (innerhalb der Familie) (Z61.4)</option>
+                <option value="1.8 Andere">1.8 Andere</option>
+                <option value="2 Psychische Störung, abweichendes Verhalten oder Behinderung in der Familie">2 Psychische Störung, abweichendes Verhalten oder Behinderung in der Familie</option>
+                <option value="2.0 Psychische Störung / abweichendes Verhalten eines Elternteils (Z63.7)">2.0 Psychische Störung / abweichendes Verhalten eines Elternteils (Z63.7)</option>
+                <option value="2.1 Behinderung eines Elternteils (Z63.7)">2.1 Behinderung eines Elternteils (Z63.7)</option>
+                <option value="2.2 Behinderung der Geschwister (Z63.7)">2.2 Behinderung der Geschwister (Z63.7)</option>
+                <option value="2.8 Andere">2.8 Andere</option>
+                <option value="3 Inadäquate oder verzerrte intrafamiliäre Kommunikation (Z62.8)">3 Inadäquate oder verzerrte intrafamiliäre Kommunikation (Z62.8)</option>
+                <option value="4 Abnorme Erziehungsbedingungen">4 Abnorme Erziehungsbedingungen</option>
+                <option value="4.0 Elterliche Überfürsorge (Z62.1)">4.0 Elterliche Überfürsorge (Z62.1)</option>
+                <option value="4.1 Unzureichende elterliche Aufsicht und Steuerung (Z62.0)">4.1 Unzureichende elterliche Aufsicht und Steuerung (Z62.0)</option>
+                <option value="4.2 Erziehung, die eine unzureichende Erfahrung vermittelt (Z62.8)">4.2 Erziehung, die eine unzureichende Erfahrung vermittelt (Z62.8)</option>
+                <option value="4.3 Unangemessene Anforderungen und Nötigungen durch die Eltern (Z62.6)">4.3 Unangemessene Anforderungen und Nötigungen durch die Eltern (Z62.6)</option>
+                <option value="4.8 Andere">4.8 Andere</option>
+                <option value="5 Abnorme unmittelbare Umgebung">5 Abnorme unmittelbare Umgebung</option>
+                <option value="5.0 Erziehung in einer Institution (Z62.2)">5.0 Erziehung in einer Institution (Z62.2)</option>
+                <option value="5.1 Abweichende Elternsituation (Z60.1)">5.1 Abweichende Elternsituation (Z60.1)</option>
+                <option value="5.2 Isolierte Familie (Z63.7)">5.2 Isolierte Familie (Z63.7)</option>
+                <option value="5.3 Lebensbedingungen mit möglicher psychosozialer Gefährdung (Z59.1)">5.3 Lebensbedingungen mit möglicher psychosozialer Gefährdung (Z59.1)</option>
+                <option value="5.8 Andere">5.8 Andere</option>
+                <option value="6 Akute, belastende Lebensereignisse">6 Akute, belastende Lebensereignisse</option>
+                <option value="6.0 Verlust einer liebevollen Beziehung (Z61.0)">6.0 Verlust einer liebevollen Beziehung (Z61.0)</option>
+                <option value="6.1 Bedrohliche Umstände infolge von Fremdunterbringung (61.1)">6.1 Bedrohliche Umstände infolge von Fremdunterbringung (61.1)</option>
+                <option value="6.2 Negativ veränderte familiäre Beziehungen durch neue Familienmitglieder (Z61.2)">6.2 Negativ veränderte familiäre Beziehungen durch neue Familienmitglieder (Z61.2)</option>
+                <option value="6.3 Ereignisse, die zur Herabsetzung der Selbstachtung führen (Z61.3)">6.3 Ereignisse, die zur Herabsetzung der Selbstachtung führen (Z61.3)</option>
+                <option value="6.4 Sexueller Missbrauch (außerhalb der Familie) (Z61.5)">6.4 Sexueller Missbrauch (außerhalb der Familie) (Z61.5)</option>
+                <option value="6.5 Unmittelbare, beängstigende Erlebnisse (Z61.7)">6.5 Unmittelbare, beängstigende Erlebnisse (Z61.7)</option>
+                <option value="6.8 Andere">6.8 Andere</option>
+                <option value="7 Gesellschaftliche Belastungsfaktoren">7 Gesellschaftliche Belastungsfaktoren</option>
+                <option value="7.0 Verfolgung oder Diskriminierung (Z60.5)">7.0 Verfolgung oder Diskriminierung (Z60.5)</option>
+                <option value="7.1 Migration oder soziale Verpflanzung (Z60.3)">7.1 Migration oder soziale Verpflanzung (Z60.3)</option>
+                <option value="7.8 Andere">7.8 Andere</option>
+                <option value="8 Chronische zwischenmenschliche Belastung im Zusammenhang mit Schule und Arbeit (Z55 = Schule, Z56 = Arbeit)">8 Chronische zwischenmenschliche Belastung im Zusammenhang mit Schule und Arbeit (Z55 = Schule, Z56 = Arbeit)</option>
+                <option value="8.1 Streitbeziehungen mit Schülern / Mitarbeitern (Z55.4, Z56.4)">8.1 Streitbeziehungen mit Schülern / Mitarbeitern (Z55.4, Z56.4)</option>
+                <option value="8.2 Sündenbockzuweisung durch Lehrer / Ausbilder (Z55.4, Z56.4)">8.2 Sündenbockzuweisung durch Lehrer / Ausbilder (Z55.4, Z56.4)</option>
+                <option value="8.3 Allgemeine Unruhe in der Schule bzw. Arbeitssituation (Z55.8, Z56.8)">8.3 Allgemeine Unruhe in der Schule bzw. Arbeitssituation (Z55.8, Z56.8)</option>
+                <option value="8.8 Andere">8.8 Andere</option>
+                <option value="9 Belastende Lebensereignisse / Situationen infolge von Verhaltensstörungen / Behinderungen des Kindes (Z72.8)">9 Belastende Lebensereignisse / Situationen infolge von Verhaltensstörungen / Behinderungen des Kindes (Z72.8)</option>
+                <option value="9.1 Institutionelle Erziehung (Z62.2)">9.1 Institutionelle Erziehung (Z62.2)</option>
+                <option value="9.2 Bedrohliche Umstände infolge von Fremdunterbringung (Z61.1)">9.2 Bedrohliche Umstände infolge von Fremdunterbringung (Z61.1)</option>
+                <option value="9.3 Abhängige Ereignisse, die zur Herabsetzung der Selbstachtung führen (Z61.3)">9.3 Abhängige Ereignisse, die zur Herabsetzung der Selbstachtung führen (Z61.3)</option>
+                <option value="9.8 Andere">9.8 Andere</option>
+            </select>
+
+            <label for="achse6">Achse VI</label>
+            <select id="achse6" name="achse6" required>
+                <option value="1 Herausragende / gute soziale Funktionen">1 Herausragende / gute soziale Funktionen</option>
+                <option value="2 Mäßige soziale Funktion">2 Mäßige soziale Funktion</option>
+                <option value="3 Leichte soziale Beeinträchtigung">3 Leichte soziale Beeinträchtigung</option>
+                <option value="4 Mäßige soziale Beeinträchtigung">4 Mäßige soziale Beeinträchtigung</option>
+                <option value="5 Ernsthafte soziale Beeinträchtigung">5 Ernsthafte soziale Beeinträchtigung</option>
+                <option value="6 Funktionsunfähig in den meisten Bereichen">6 Funktionsunfähig in den meisten Bereichen</option>
+                <option value="7 Tiefe und durchgängige soziale Beeinträchtigung">7 Tiefe und durchgängige soziale Beeinträchtigung</option>
+                <option value="8 Nicht zutreffend / nicht einschätzbar">8 Nicht zutreffend / nicht einschätzbar</option>
+            </select>
+        </div>
+
+        <div class="form-section">
+            <label for="anamnese">Anamnese</label>
+            <textarea id="anamnese" name="anamnese" required></textarea>
+
+            <label for="psychobefund">Psychopathologischer Befund</label>
+            <textarea id="psychobefund" name="psychobefund" required></textarea>
+        </div>
+
+        <div class="form-section">
+            <label for="empfehlungen">Zusammenfassung und Empfehlungen</label>
+            <select id="empfehlungen" name="empfehlungen" required>
+                <option value="Weiterbehandlung mit bisheriger Medikation in der gleichen Dosis">Weiterbehandlung mit bisheriger Medikation in der gleichen Dosis</option>
+                <option value="EKG-Kontrolle am ...">EKG-Kontrolle am ...</option>
+                <option value="Blutbildkontrolle am ...">Blutbildkontrolle am ...</option>
+                <option value="X-Medikation Spiegel Kontrolle am ...">X-Medikation Spiegel Kontrolle am ...</option>
+                <option value="Gemäß der Leitlinie">Gemäß der Leitlinie</option>
+                <option value="WiederVorstellung in 2 Wochen">WiederVorstellung in 2 Wochen</option>
+                <option value="WiederVorstellung in 4 Wochen">WiederVorstellung in 4 Wochen</option>
+                <option value="WiederVorstellung in 3 Monaten">WiederVorstellung in 3 Monaten</option>
+                <option value="WiederVorstellung in 6 Monaten">WiederVorstellung in 6 Monaten</option>
+                <option value="Bei Bedarf">Bei Bedarf</option>
+            </select>
+        </div>
+
+        <button type="button" onclick="generateReport()">Bericht generieren</button>
+    </form>
+
+    <div class="summary" id="summary"></div>
+
+    <script>
+        function generateReport() {
+            const form = document.getElementById('kurzbriefeForm');
+            const vorname = form.vorname.value;
+            const nachname = form.nachname.value;
+            const geschlecht = form.geschlecht.value;
+            const behandlungsdatum = form.behandlungsdatum.value;
+            const achse1 = form.achse1.value;
+            const achse2 = form.achse2.value;
+            const achse3 = form.achse3.value;
+            const achse4 = form.achse4.value;
+            const achse5 = form.achse5.value;
+            const achse6 = form.achse6.value;
+            const anamnese = form.anamnese.value;
+            const psychobefund = form.psychobefund.value;
+            const empfehlungen = form.empfehlungen.value;
+
+            const report = `
+                <p>Wir berichten über ${vorname} ${nachname}, der/die ${geschlecht} sich seit ${behandlungsdatum} in unserer ambulanten Behandlung befindet.</p>
+                <h2>Multiaxiale Diagnose:</h2>
+                <p>Achse I: ${achse1}</p>
+                <p>Achse II: ${achse2}</p>
+                <p>Achse III: ${achse3}</p>
+                <p>Achse IV: ${achse4}</p>
+                <p>Achse V: ${achse5}</p>
+                <p>Achse VI: ${achse6}</p>
+                <h2>Anamnese:</h2>
+                <p>${anamnese}</p>
+                <h2>Psychopathologischer Befund:</h2>
+                <p>${psychobefund}</p>
+                <h2>Zusammenfassung und Empfehlungen:</h2>
+                <p>${empfehlungen}</p>
+            `;
+
+            document.getElementById('summary').innerHTML = report;
+        }
+    </script>
+</body>
+</html>
