@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Autofinanzierung Rechner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .calculator {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Autofinanzierung Rechner</h1>
+    
+    <!-- Ratenrechner mit Schlussrate -->
+    <div class="calculator">
+        <h2>1. Ratenberechnung mit Schlussrate</h2>
+        <div class="form-group">
+            <label for="autoPreis">Autopreis (€):</label>
+            <input type="number" id="autoPreis" step="100">
+            
+            <label for="anzahlung">Anzahlung (€):</label>
+            <input type="number" id="anzahlung" step="100">
+            
+            <label for="zinssatz">Zinssatz (%):</label>
+            <input type="number" id="zinssatz" step="0.01">
+            
+            <label for="laufzeit">Laufzeit (Monate):</label>
+            <input type="number" id="laufzeit">
+            
+            <button onclick="berechneRaten()">Berechnen</button>
+        </div>
+        <div id="ratenErgebnis" class="result"></div>
+    </div>
+
+    <!-- Vorzeitige Rückzahlung -->
+    <div class="calculator">
+        <h2>2. Restschuldberechnung bei vorzeitiger Rückzahlung</h2>
+        <div class="form-group">
+            <label for="kreditBeginn">Kreditbeginn:</label>
+            <input type="date" id="kreditBeginn">
+            
+            <label for="aktuellesDatum">Aktuelles Datum:</label>
+            <input type="date" id="aktuellesDatum">
+            
+            <label for="kreditPreis">Autopreis (€):</label>
+            <input type="number" id="kreditPreis" step="100">
+            
+            <label for="kreditAnzahlung">Anzahlung (€):</label>
+            <input type="number" id="kreditAnzahlung" step="100">
+            
+            <label for="kreditZins">Zinssatz (%):</label>
+            <input type="number" id="kreditZins" step="0.01">
+            
+            <label for="kreditLaufzeit">Gesamtlaufzeit (Monate):</label>
+            <input type="number" id="kreditLaufzeit">
+            
+            <label for="vorfaelligkeit">Vorfälligkeitsentschädigung (%):</label>
+            <input type="number" id="vorfaelligkeit" step="0.01">
+            
+            <button onclick="berechneRestschuld()">Berechnen</button>
+        </div>
+        <div id="restschuldErgebnis" class="result"></div>
+    </div>
+
+    <script>
+        function berechneRaten() {
+            const autoPreis = parseFloat(document.getElementById('autoPreis').value);
+            const anzahlung = parseFloat(document.getElementById('anzahlung').value);
+            const zinssatz = parseFloat(document.getElementById('zinssatz').value) / 100;
+            const laufzeit = parseInt(document.getElementById('laufzeit').value);
+            
+            // Berechnung des Finanzierungsbetrags
+            const finanzierungsBetrag = autoPreis - anzahlung;
+            
+            // Berechnung der Schlussrate (ca. 30% vom Autopreis)
+            const schlussrate = autoPreis * 0.3;
+            
+            // Monatlicher Zinssatz
+            const monatlicherZins = zinssatz / 12;
+            
+            // Berechnung der monatlichen Rate
+            const rate = (finanzierungsBetrag - (schlussrate / Math.pow(1 + monatlicherZins, laufzeit))) * 
+                        (monatlicherZins * Math.pow(1 + monatlicherZins, laufzeit)) / 
+                        (Math.pow(1 + monatlicherZins, laufzeit) - 1);
+            
+            document.getElementById('ratenErgebnis').innerHTML = `
+                <h3>Ergebnis:</h3>
+                <p>Finanzierungsbetrag: ${finanzierungsBetrag.toFixed(2)} €</p>
+                <p>Monatliche Rate: ${rate.toFixed(2)} €</p>
+                <p>Schlussrate: ${schlussrate.toFixed(2)} €</p>
+                <p>Gesamtzinsen: ${((rate * laufzeit + schlussrate) - finanzierungsBetrag).toFixed(2)} €</p>
+            `;
+        }
+
+        function berechneRestschuld() {
+            const kreditBeginn = new Date(document.getElementById('kreditBeginn').value);
+            const aktuellesDatum = new Date(document.getElementById('aktuellesDatum').value);
+            const kreditPreis = parseFloat(document.getElementById('kreditPreis').value);
+            const kreditAnzahlung = parseFloat(document.getElementById('kreditAnzahlung').value);
+            const kreditZins = parseFloat(document.getElementById('kreditZins').value) / 100;
+            const kreditLaufzeit = parseInt(document.getElementById('kreditLaufzeit').value);
+            const vorfaelligkeit = parseFloat(document.getElementById('vorfaelligkeit').value) / 100;
+
+            // Berechnung der verstrichenen Monate
+            const verstricheneMonate = Math.floor((aktuellesDatum - kreditBeginn) / (1000 * 60 * 60 * 24 * 30));
+            
+            // Finanzierungsbetrag
+            const finanzierungsBetrag = kreditPreis - kreditAnzahlung;
+            
+            // Schlussrate (30% vom Autopreis)
+            const schlussrate = kreditPreis * 0.3;
+            
+            // Monatlicher Zinssatz
+            const monatlicherZins = kreditZins / 12;
+            
+            // Berechnung der monatlichen Rate
+            const rate = (finanzierungsBetrag - (schlussrate / Math.pow(1 + monatlicherZins, kreditLaufzeit))) * 
+                        (monatlicherZins * Math.pow(1 + monatlicherZins, kreditLaufzeit)) / 
+                        (Math.pow(1 + monatlicherZins, kreditLaufzeit) - 1);
+            
+            // Berechnung der Restschuld
+            const restschuld = finanzierungsBetrag * Math.pow(1 + monatlicherZins, verstricheneMonate) - 
+                             rate * ((Math.pow(1 + monatlicherZins, verstricheneMonate) - 1) / monatlicherZins);
+            
+            // Vorfälligkeitsentschädigung
+            const vorfaelligkeitsEntschaedigung = restschuld * vorfaelligkeit;
+            
+            document.getElementById('restschuldErgebnis').innerHTML = `
+                <h3>Ergebnis:</h3>
+                <p>Verstrichene Monate: ${verstricheneMonate}</p>
+                <p>Ursprüngliche monatliche Rate: ${rate.toFixed(2)} €</p>
+                <p>Aktuelle Restschuld: ${restschuld.toFixed(2)} €</p>
+                <p>Vorfälligkeitsentschädigung: ${vorfaelligkeitsEntschaedigung.toFixed(2)} €</p>
+                <p>Gesamtbetrag bei sofortiger Rückzahlung: ${(restschuld + vorfaelligkeitsEntschaedigung).toFixed(2)} €</p>
+            `;
+        }
+    </script>
+</body>
+</html>
